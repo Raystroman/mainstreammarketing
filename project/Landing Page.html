@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Mainstream Marketing | High-End Detailing Growth</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-container-low": "#131313",
+          "surface-container": "#1A1919",
+          "surface-container-high": "#201F1F",
+          "surface-container-highest": "#262626",
+          "surface": "#0E0E0E",
+          "surface-bright": "#2C2C2C",
+          "background": "#0E0E0E",
+          "on-background": "#FFFFFF",
+          "on-surface": "#FFFFFF",
+          "on-surface-variant": "#ADAAAA",
+          "outline-variant": "#484847",
+          "outline": "#767575",
+          "primary": "#FF9157",
+          "primary-dim": "#FF7520",
+          "primary-fixed": "#FF7A2C",
+          "on-primary": "#531E00",
+          "on-primary-fixed": "#000000",
+          "tertiary": "#7999FF",
+        },
+        fontFamily: {
+          headline: ["Sora", "system-ui", "sans-serif"],
+          body: ["Inter", "system-ui", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; font-family: 'Inter', system-ui, sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24; }
+
+  /* Fluid type scale — mobile-safe */
+  .h-display { font-size: clamp(2.125rem, 7.2vw, 5.25rem); line-height: 1; letter-spacing: -0.035em; word-break: break-word; overflow-wrap: break-word; }
+  .h-section { font-size: clamp(1.75rem, 5vw, 3.5rem); line-height: 1.05; letter-spacing: -0.03em; word-break: break-word; overflow-wrap: break-word; }
+  .h-sub { font-size: clamp(1.125rem, 2vw, 1.5rem); line-height: 1.2; letter-spacing: -0.02em; }
+  .t-lead { font-size: clamp(0.95rem, 1.5vw, 1.125rem); line-height: 1.65; }
+  .t-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+
+  .glass-card {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    background-color: rgba(26, 25, 25, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .glow-primary { box-shadow: 0 12px 40px rgba(255, 145, 87, 0.25), 0 0 0 1px rgba(255, 145, 87, 0.15) inset; }
+  .glow-soft { box-shadow: 0 0 60px rgba(255, 145, 87, 0.08); }
+
+  /* Scroll-reveal */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 800ms cubic-bezier(.22,.61,.36,1), transform 800ms cubic-bezier(.22,.61,.36,1); will-change: opacity, transform; }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1); will-change: opacity, transform; }
+  .reveal-left.is-in { opacity: 1; transform: translateX(0); }
+  .reveal-pop { opacity: 0; transform: scale(0.6); transition: opacity 600ms cubic-bezier(.34,1.56,.64,1), transform 600ms cubic-bezier(.34,1.56,.64,1); will-change: opacity, transform; }
+  .reveal-pop.is-in { opacity: 1; transform: scale(1); }
+
+  /* Animated timeline line draw */
+  .timeline-line { transform-origin: top center; transform: scaleY(0); transition: transform 1600ms cubic-bezier(.22,.61,.36,1); }
+  .timeline-line.is-in { transform: scaleY(1); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-left, .reveal-pop { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .timeline-line { transform: scaleY(1) !important; transition: none !important; }
+    .word-reveal .w { opacity: 1 !important; transform: none !important; }
+    #cursor-dot, #cursor-ring, #cursor-trail { display: none !important; }
+  }
+
+  /* Custom cursor (desktop only) */
+  #cursor-dot, #cursor-ring {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+    transform: translate3d(-100px, -100px, 0);
+    will-change: transform;
+    mix-blend-mode: screen;
+  }
+  #cursor-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255, 145, 87, 1);
+    box-shadow: 0 0 14px rgba(255, 145, 87, 0.9), 0 0 30px rgba(255, 145, 87, 0.5);
+    transition: width 180ms ease, height 180ms ease, background 180ms ease;
+  }
+  #cursor-ring {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1.5px solid rgba(255, 145, 87, 0.55);
+    box-shadow: 0 0 20px rgba(255, 145, 87, 0.35);
+    transition: width 250ms ease, height 250ms ease, border-color 250ms ease, background-color 250ms ease;
+    margin-left: -20px; margin-top: -20px;
+  }
+  #cursor-dot.is-hover { width: 14px; height: 14px; }
+  #cursor-ring.is-hover {
+    width: 64px; height: 64px; margin-left: -32px; margin-top: -32px;
+    border-color: rgba(255, 145, 87, 0.9);
+    background: rgba(255, 145, 87, 0.08);
+  }
+  @media (hover: none), (pointer: coarse) {
+    #cursor-dot, #cursor-ring { display: none !important; }
+  }
+  body.has-custom-cursor { cursor: none; }
+  body.has-custom-cursor a, body.has-custom-cursor button { cursor: none; }
+
+  /* Word-by-word reveal */
+  .word-reveal .w {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(24px) rotateX(-35deg);
+    transform-origin: center bottom;
+    transition: opacity 620ms cubic-bezier(.22,.61,.36,1), transform 620ms cubic-bezier(.22,.61,.36,1);
+    will-change: opacity, transform;
+  }
+  .word-reveal.is-in .w { opacity: 1; transform: translateY(0) rotateX(0); }
+
+  /* Floating glow orb that follows mouse, section-scoped */
+  .ambient-cursor {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+  }
+  .ambient-cursor::before {
+    content: ''; position: absolute;
+    width: 480px; height: 480px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,145,87,0.18) 0%, rgba(255,145,87,0.05) 40%, transparent 70%);
+    left: var(--mx, 50%); top: var(--my, 50%);
+    transform: translate(-50%, -50%);
+    transition: left 220ms ease-out, top 220ms ease-out, opacity 300ms;
+    opacity: 0;
+    filter: blur(12px);
+  }
+  .ambient-cursor.is-active::before { opacity: 1; }
+
+  /* Timeline premium cards */
+  .step-card {
+    background-color: rgba(22, 21, 21, 0.92);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0) 60%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: transform 400ms cubic-bezier(.22,.61,.36,1), border-color 400ms, box-shadow 400ms;
+  }
+  .step-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 145, 87, 0.32);
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5), 0 0 60px rgba(255, 145, 87, 0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .step-card-accent {
+    background-color: rgba(28, 22, 18, 0.92);
+    background-image: linear-gradient(180deg, rgba(255,145,87,0.06), rgba(255,145,87,0) 65%);
+    border-color: rgba(255, 145, 87, 0.28);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4), 0 0 60px rgba(255, 145, 87, 0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .step-card-accent:hover {
+    border-color: rgba(255, 145, 87, 0.5);
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5), 0 0 80px rgba(255, 145, 87, 0.28), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  /* Button reset for touch */
+  button, a { -webkit-tap-highlight-color: transparent; }
+  .btn-primary {
+    background: linear-gradient(180deg, #FFA06B 0%, #FF7A2C 100%);
+    color: #000;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: transform .2s ease, box-shadow .3s ease;
+    box-shadow: 0 10px 30px rgba(255, 145, 87, 0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(255, 145, 87, 0.45); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-ghost {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #fff;
+    transition: all .2s ease;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,145,87,0.4); }
+
+  /* Animations */
+  @keyframes activityFade {
+    0%, 8% { opacity: 0; transform: translateY(8px); }
+    14%, 86% { opacity: 1; transform: translateY(0); }
+    92%, 100% { opacity: 0; transform: translateY(-4px); }
+  }
+  .activity-item { animation: activityFade 9s infinite ease-in-out; }
+  .activity-item:nth-child(1) { animation-delay: 0s; }
+  .activity-item:nth-child(2) { animation-delay: 0.8s; }
+  .activity-item:nth-child(3) { animation-delay: 1.6s; }
+
+  @keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  }
+  .pulse-dot { animation: pulseDot 2s infinite; }
+
+  @keyframes revealUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { animation: revealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+  /* Timeline connector */
+  .connector-h { height: 2px; background: linear-gradient(90deg, rgba(255,145,87,0.6), rgba(255,145,87,0.1)); flex: 1; }
+  .connector-v { width: 2px; background: linear-gradient(180deg, rgba(255,145,87,0.6), rgba(255,145,87,0.1)); height: 24px; }
+
+  /* Hide scrollbars in the kanban scroll */
+  .scroll-soft::-webkit-scrollbar { height: 6px; }
+  .scroll-soft::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 9999px; }
+
+  /* Section helpers — larger vertical rhythm on mobile */
+  .section-y { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .section-x { padding-inline: clamp(1.25rem, 4vw, 3rem); }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+
+<!-- Navigation -->
+<nav class="fixed top-0 inset-x-0 z-50 bg-[#0E0E0E]/80 backdrop-blur-2xl border-b border-white/5">
+  <div class="flex justify-between items-center gap-3 section-x max-w-screen-2xl mx-auto py-3.5 md:py-5">
+    <a href="#" class="text-base sm:text-lg md:text-2xl font-extrabold tracking-tighter text-primary italic font-headline shrink min-w-0 truncate">Mainstream Marketing</a>
+    <div class="hidden lg:flex gap-8 items-center font-headline font-bold tracking-tight text-sm">
+      <a class="text-primary" href="#process">Process</a>
+      <a class="text-on-surface-variant hover:text-primary transition" href="#showcase">Showcase</a>
+      <a class="text-on-surface-variant hover:text-primary transition" href="#results">Results</a>
+      <a class="text-on-surface-variant hover:text-primary transition" href="#pricing">Pricing</a>
+    </div>
+    <button class="btn-primary px-4 md:px-6 py-2.5 md:py-3 rounded-full text-[10px] md:text-xs whitespace-nowrap shrink-0">Get Audit</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="relative min-h-[88vh] md:min-h-screen flex items-center pt-24 md:pt-32 pb-20 md:pb-28 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img alt="" class="w-full h-full object-cover opacity-50 md:opacity-60 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfI2uay7iU0RR4BerjGofT21jD_o_RHiOhtc7z_6WRhmgi44N-vBswIB4YTNNLB38KFbwo74x8k6fUMQenvcR7hl5bMubsyzEyxXkjAbKVTLOI3QLytZo2C55tJixsnbvB2t6PcUDmc8UBOv5u4HmXZapXzWZ-kyyEKk-N3GuA8jiMfDVpSNCGQFM_BeGW6uTrrSPHv6qNcb_0Ue7O7RKBN4E8n0leBsuiv3Pw-cb-zyn57QIqfY0rIrR2HtiMkUyI0O6U3pg260Ss"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-background via-background/70 lg:via-background/20 to-transparent"></div>
+    <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[140px] pointer-events-none"></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-screen-2xl mx-auto section-x grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-16 items-center">
+    <div class="max-w-2xl">
+      <div class="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-primary/10 border border-primary/25 mb-6 md:mb-8">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 pulse-dot"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        <span class="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.22em] text-primary">Now Booking · Q4 2026</span>
+      </div>
+
+      <h1 class="word-reveal h-display font-extrabold font-headline mb-5 md:mb-7 uppercase italic text-balance" data-word-reveal="1">
+        <span class="w">Get</span> <span class="w">more</span> <span class="w">high-ticket</span> <span class="w text-primary">ceramic</span> <span class="w text-primary">coating</span> <span class="w">jobs</span> <span class="w">on</span> <span class="w">autopilot.</span>
+      </h1>
+
+      <p class="text-on-surface-variant t-lead font-light mb-8 md:mb-10 max-w-xl">
+        Most detailers lose thousands every month from missed leads. We turn your ads into a steady flow of booked ceramic and PPF jobs — no chasing required.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-5 sm:gap-6 sm:items-center">
+        <button class="btn-primary w-full sm:w-auto px-7 py-4 rounded-2xl text-[13px] md:text-sm">Claim your free audit</button>
+        <div class="flex items-center gap-3.5">
+          <div class="flex -space-x-2.5 shrink-0">
+            <div class="w-9 h-9 rounded-full border-2 border-background overflow-hidden bg-surface-container-highest">
+              <img alt="" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZWTX-3Y4TEwRD8HnXDsV0hJF3BplAvltyHDZAFZkSHka7hO_HdIxRk0nbHe66PNIuUv3DfhU-yiOsiztGkNqDZD0gq9pUtR_AFg6ShWgfXqhRZWG0N53gFmFqplTgG0HfCP0eSrDz7y3MufsOtGoupgg3vwIKVCi7a7g64DvFLMELuc01CnEAsd18FVgnTcyTFubSQ8PGP5Fzv3xaVtab3pt0F4uqs4_hAHpubafaNah0KM5UB3z3EwtKc5xUTyd5E_CMmpyAbiqC"/>
+            </div>
+            <div class="w-9 h-9 rounded-full border-2 border-background overflow-hidden bg-surface-container-highest">
+              <img alt="" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD96V88j9biqjv0keQeaOLtuIRMrZVhIZs8vutsnhmGQ2zHr091Xx2eLOyiuq6fiymdzNSabx2mEC3zMSBUZJaNYFp-a7bBSqWcCD25wC-um79at3c54K_myMY4ibDD7ry1t4JBeG3xTPW3qIXZvnl64Y5SwKigoosfeFbOu1uw1vPHGftohqvXmx0_ydBSnDy4D6hPghBExwbit0pYYrbdU4doQ3Ge0TwUqL2c5o7_tQTcxnH_6wdr5Pa_5_60kJkFZUm01-Gf8Tg5"/>
+            </div>
+            <div class="w-9 h-9 rounded-full border-2 border-background bg-surface-container-highest flex items-center justify-center text-[10px] font-extrabold text-primary">500+</div>
+          </div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant leading-[1.5]">500+ shops<br/>$12M+ revenue</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live activity card -->
+    <div class="w-full max-w-md lg:max-w-sm lg:ml-auto">
+      <div class="glass-card rounded-3xl p-5 md:p-6 relative overflow-hidden glow-soft">
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex items-center gap-2">
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 pulse-dot"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.22em] text-green-500">Live Activity</span>
+          </div>
+          <span class="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant">24/7</span>
+        </div>
+
+        <div class="space-y-3">
+          <div class="activity-item flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/5">
+            <div class="w-9 h-9 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[18px] text-primary">person_add</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[11px] font-bold uppercase tracking-wide truncate">New lead · Ceramic</div>
+              <div class="text-[10px] text-primary font-bold">$899 job value</div>
+            </div>
+          </div>
+          <div class="activity-item flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/5">
+            <div class="w-9 h-9 rounded-xl bg-blue-500/15 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[18px] text-blue-400">auto_awesome</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[11px] font-bold uppercase tracking-wide truncate">Auto follow-up sent</div>
+              <div class="text-[10px] text-on-surface-variant">SMS + email in 30s</div>
+            </div>
+          </div>
+          <div class="activity-item flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/5">
+            <div class="w-9 h-9 rounded-xl bg-green-500/15 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[18px] text-green-400">event_available</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[11px] font-bold uppercase tracking-wide truncate">Booking confirmed</div>
+              <div class="text-[10px] text-green-400 font-bold">$2,400 PPF package</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- System Flow -->
+<section id="process" class="section-y bg-[#080808] relative overflow-hidden">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,145,87,0.08),transparent_55%)] pointer-events-none"></div>
+  <div class="ambient-cursor" data-ambient="1"></div>
+
+  <div class="max-w-6xl mx-auto section-x text-center relative">
+    <div class="reveal inline-flex items-center px-4 py-1.5 rounded-full bg-primary/5 border border-primary/30 mb-7 md:mb-9" style="box-shadow: 0 0 24px rgba(255,145,87,0.12);" data-reveal-delay="0">
+      <span class="text-[10px] font-extrabold uppercase tracking-[0.3em] text-primary">Our System</span>
+    </div>
+
+    <h2 class="reveal word-reveal h-section font-extrabold font-headline uppercase italic mb-6 md:mb-7" data-reveal-delay="100" data-word-reveal="1">
+      <span class="w">How</span> <span class="w">our</span> <span class="w">AI</span> <span class="w">system</span><br/><span class="w text-primary">turns</span> <span class="w text-primary">leads</span> <span class="w text-primary">into</span> <span class="w text-primary">booked</span> <span class="w text-primary">jobs</span>
+    </h2>
+
+    <p class="reveal text-on-surface-variant t-lead font-light max-w-xl mx-auto mb-14 md:mb-20" data-reveal-delay="200">
+      We combine AI, automation, and proven strategies to fill your calendar with high-paying jobs.
+    </p>
+
+    <!-- Timeline -->
+    <div class="relative text-left">
+      <!-- vertical line -->
+      <div class="timeline-line absolute left-[27px] md:left-[39px] top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-primary/80 via-primary/50 to-primary/80" aria-hidden="true" style="box-shadow: 0 0 18px rgba(255,145,87,0.55), 0 0 40px rgba(255,145,87,0.3);"></div>
+
+      <div class="space-y-6 md:space-y-10">
+        <!-- step -->
+        <div class="reveal-left relative flex items-stretch gap-4 md:gap-8" data-reveal-delay="100">
+          <div class="relative z-10 shrink-0 self-start mt-6 md:mt-7 w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#0E0E0E] border-2 border-primary/60 flex items-center justify-center text-primary font-extrabold text-xl md:text-3xl font-headline" style="box-shadow: 0 0 22px rgba(255,145,87,0.4), 0 0 50px rgba(255,145,87,0.18), inset 0 0 14px rgba(255,145,87,0.1);">1</div>
+          <div class="flex-1 min-w-0 step-card rounded-2xl md:rounded-[1.75rem] p-6 md:p-11 min-h-[128px] md:min-h-[168px] flex items-center gap-5 md:gap-9">
+            <div class="relative shrink-0 w-16 h-16 md:w-[88px] md:h-[88px] rounded-2xl bg-surface-container-high flex items-center justify-center" style="box-shadow: 0 0 34px rgba(255,145,87,0.18) inset, 0 0 22px rgba(255,145,87,0.1);">
+              <span class="material-symbols-outlined text-[32px] md:text-[44px] text-primary">campaign</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-[15px] md:text-2xl font-extrabold uppercase tracking-wide mb-1.5 md:mb-2.5 font-headline">AI-Powered Ads</h3>
+              <p class="text-on-surface-variant text-[13px] md:text-base leading-relaxed">Our AI creates and optimizes high-converting ads that bring in qualified leads.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-left relative flex items-stretch gap-4 md:gap-8" data-reveal-delay="250">
+          <div class="relative z-10 shrink-0 self-start mt-6 md:mt-7 w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#0E0E0E] border-2 border-primary/60 flex items-center justify-center text-primary font-extrabold text-xl md:text-3xl font-headline" style="box-shadow: 0 0 22px rgba(255,145,87,0.4), 0 0 50px rgba(255,145,87,0.18), inset 0 0 14px rgba(255,145,87,0.1);">2</div>
+          <div class="flex-1 min-w-0 step-card rounded-2xl md:rounded-[1.75rem] p-6 md:p-11 min-h-[128px] md:min-h-[168px] flex items-center gap-5 md:gap-9">
+            <div class="relative shrink-0 w-16 h-16 md:w-[88px] md:h-[88px] rounded-2xl bg-surface-container-high flex items-center justify-center" style="box-shadow: 0 0 34px rgba(255,145,87,0.18) inset, 0 0 22px rgba(255,145,87,0.1);">
+              <span class="material-symbols-outlined text-[32px] md:text-[44px] text-primary">filter_alt</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-[15px] md:text-2xl font-extrabold uppercase tracking-wide mb-1.5 md:mb-2.5 font-headline">Lead Capture</h3>
+              <p class="text-on-surface-variant text-[13px] md:text-base leading-relaxed">We capture leads instantly through optimized forms and funnels.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-left relative flex items-stretch gap-4 md:gap-8" data-reveal-delay="400">
+          <div class="relative z-10 shrink-0 self-start mt-6 md:mt-7 w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#0E0E0E] border-2 border-primary/60 flex items-center justify-center text-primary font-extrabold text-xl md:text-3xl font-headline" style="box-shadow: 0 0 22px rgba(255,145,87,0.4), 0 0 50px rgba(255,145,87,0.18), inset 0 0 14px rgba(255,145,87,0.1);">3</div>
+          <div class="flex-1 min-w-0 step-card rounded-2xl md:rounded-[1.75rem] p-6 md:p-11 min-h-[128px] md:min-h-[168px] flex items-center gap-5 md:gap-9">
+            <div class="relative shrink-0 w-16 h-16 md:w-[88px] md:h-[88px] rounded-2xl bg-surface-container-high flex items-center justify-center" style="box-shadow: 0 0 34px rgba(255,145,87,0.18) inset, 0 0 22px rgba(255,145,87,0.1);">
+              <span class="material-symbols-outlined text-[32px] md:text-[44px] text-primary">bolt</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-[15px] md:text-2xl font-extrabold uppercase tracking-wide mb-1.5 md:mb-2.5 font-headline">Instant Follow-Up</h3>
+              <p class="text-on-surface-variant text-[13px] md:text-base leading-relaxed">AI responds immediately to increase conversion and engagement.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-left relative flex items-stretch gap-4 md:gap-8" data-reveal-delay="550">
+          <div class="relative z-10 shrink-0 self-start mt-6 md:mt-7 w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#0E0E0E] border-2 border-primary/60 flex items-center justify-center text-primary font-extrabold text-xl md:text-3xl font-headline" style="box-shadow: 0 0 22px rgba(255,145,87,0.4), 0 0 50px rgba(255,145,87,0.18), inset 0 0 14px rgba(255,145,87,0.1);">4</div>
+          <div class="flex-1 min-w-0 step-card rounded-2xl md:rounded-[1.75rem] p-6 md:p-11 min-h-[128px] md:min-h-[168px] flex items-center gap-5 md:gap-9">
+            <div class="relative shrink-0 w-16 h-16 md:w-[88px] md:h-[88px] rounded-2xl bg-surface-container-high flex items-center justify-center" style="box-shadow: 0 0 34px rgba(255,145,87,0.18) inset, 0 0 22px rgba(255,145,87,0.1);">
+              <span class="material-symbols-outlined text-[32px] md:text-[44px] text-primary">support_agent</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-[15px] md:text-2xl font-extrabold uppercase tracking-wide mb-1.5 md:mb-2.5 font-headline">Qualify &amp; Convert</h3>
+              <p class="text-on-surface-variant text-[13px] md:text-base leading-relaxed">We filter and nurture leads into ready-to-book customers.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-pop relative flex items-stretch gap-4 md:gap-8 pt-3 md:pt-5" data-reveal-delay="750">
+          <div class="relative z-10 shrink-0 self-start mt-7 md:mt-9 w-16 h-16 md:w-24 md:h-24 rounded-full bg-[#0E0E0E] border-[3px] border-primary flex items-center justify-center text-primary font-extrabold text-2xl md:text-4xl font-headline" style="box-shadow: 0 0 36px rgba(255,145,87,0.9), 0 0 80px rgba(255,145,87,0.45), inset 0 0 20px rgba(255,145,87,0.25);">
+            5
+            <span class="absolute -top-2 -right-2 md:-top-2.5 md:-right-2.5 w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary flex items-center justify-center" style="box-shadow: 0 0 16px rgba(255,145,87,0.8);">
+              <span class="material-symbols-outlined text-black" style="font-size: 14px; font-variation-settings: 'FILL' 1, 'wght' 700;">check</span>
+            </span>
+          </div>
+          <div class="flex-1 min-w-0 step-card step-card-accent rounded-3xl md:rounded-[2rem] p-7 md:p-14 min-h-[148px] md:min-h-[200px] flex items-center gap-5 md:gap-10 relative overflow-hidden">
+            <div class="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/15 border border-primary/40">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              <span class="text-[9px] md:text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary">Outcome</span>
+            </div>
+            <div class="relative shrink-0 w-20 h-20 md:w-[108px] md:h-[108px] rounded-2xl bg-primary/15 border border-primary/40 flex items-center justify-center" style="box-shadow: 0 0 44px rgba(255,145,87,0.4) inset, 0 0 40px rgba(255,145,87,0.3);">
+              <span class="material-symbols-outlined text-[40px] md:text-[56px] text-primary">event_available</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-[17px] md:text-[28px] font-extrabold uppercase italic tracking-wide mb-2 md:mb-3 text-primary font-headline leading-tight">Booked &amp; Confirmed</h3>
+              <p class="text-white/80 text-[13px] md:text-lg leading-relaxed">Appointments are scheduled directly into your calendar — ready to work, not chase.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final callout -->
+    <div class="reveal relative mt-16 md:mt-28 rounded-3xl md:rounded-[2rem] overflow-hidden border border-primary/30 p-8 md:p-14 flex flex-col md:flex-row items-center text-center md:text-left gap-6 md:gap-10" style="background: linear-gradient(135deg, rgba(36,24,18,0.95) 0%, rgba(22,18,16,0.95) 55%, rgba(18,14,12,0.95) 100%); box-shadow: 0 0 80px rgba(255,145,87,0.22), 0 0 140px rgba(255,145,87,0.12), inset 0 1px 0 rgba(255,255,255,0.06);" data-reveal-delay="200">
+      <!-- ambient glow accent -->
+      <div class="absolute -top-24 -right-16 w-72 h-72 rounded-full bg-primary/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -bottom-20 -left-10 w-56 h-56 rounded-full bg-primary/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <!-- top accent line -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 md:w-60 h-px bg-gradient-to-r from-transparent via-primary to-transparent" aria-hidden="true"></div>
+
+      <div class="relative shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-primary/15 border border-primary/40 flex items-center justify-center" style="box-shadow: 0 0 40px rgba(255,145,87,0.35) inset, 0 0 36px rgba(255,145,87,0.3);">
+        <span class="material-symbols-outlined text-[34px] md:text-[48px] text-primary">emoji_events</span>
+      </div>
+      <div class="relative flex-1 min-w-0">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/15 border border-primary/40 mb-3 md:mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-primary">The Bottom Line</span>
+        </div>
+        <div class="text-xl md:text-[2.25rem] font-extrabold uppercase font-headline tracking-tight leading-[1.05]">We don't just get leads.</div>
+        <div class="text-xl md:text-[2.25rem] font-extrabold uppercase italic font-headline tracking-tight text-primary leading-[1.05] mt-1 md:mt-2" style="text-shadow: 0 0 30px rgba(255,145,87,0.4);">We get you booked.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Revenue Dashboard -->
+<section id="results" class="section-y relative bg-[#0a0a0a] overflow-hidden">
+  <div class="ambient-cursor" data-ambient="1"></div>
+  <div class="max-w-screen-2xl mx-auto section-x">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 md:mb-16 gap-8">
+      <div class="max-w-2xl">
+        <span class="reveal t-label text-primary mb-3 block" data-reveal-delay="0">The Command Center</span>
+        <h2 class="reveal word-reveal h-section font-extrabold font-headline uppercase italic mb-4" data-reveal-delay="100" data-word-reveal="1">
+          <span class="w">See</span> <span class="w">exactly</span> <span class="w">how</span> <span class="w text-primary">your</span> <span class="w text-primary">shop</span> <span class="w text-primary">scales</span>
+        </h2>
+        <p class="reveal text-on-surface-variant t-lead font-light" data-reveal-delay="200">
+          Every lead, every follow-up, every booking — tracked in one dashboard so you always know what's working.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:max-w-xl">
+        <div class="reveal p-4 md:p-5 bg-white/5 rounded-2xl border border-white/10" data-reveal-delay="250">
+          <span class="text-[10px] font-bold text-on-surface-variant block uppercase tracking-widest mb-1.5">Monthly Goal</span>
+          <div class="text-xl md:text-2xl font-extrabold font-headline" data-countup="25000" data-prefix="$" data-sep="1">$0</div>
+        </div>
+        <div class="reveal p-4 md:p-5 bg-white/5 rounded-2xl border border-white/10" data-reveal-delay="350">
+          <span class="text-[10px] font-bold text-on-surface-variant block uppercase tracking-widest mb-1.5">Current</span>
+          <div class="text-xl md:text-2xl font-extrabold font-headline" data-countup="18400" data-prefix="$" data-sep="1">$0</div>
+        </div>
+        <div class="reveal p-4 md:p-5 bg-primary/10 rounded-2xl border border-primary/25" data-reveal-delay="450">
+          <span class="text-[10px] font-bold text-primary block uppercase tracking-widest mb-1.5">Status</span>
+          <div class="text-sm md:text-base font-extrabold text-primary italic uppercase leading-tight">On track to goal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI tiles -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 mb-4 md:mb-8">
+      <div class="reveal glass-card p-5 md:p-8 rounded-2xl md:rounded-3xl" data-reveal-delay="100">
+        <span class="text-[10px] font-extrabold uppercase tracking-[0.22em] text-primary block mb-2.5">Revenue</span>
+        <div class="text-[34px] md:text-5xl font-extrabold font-headline leading-none" data-countup="12400" data-prefix="$" data-sep="1">$0</div>
+        <div class="text-[11px] font-bold text-on-surface-variant mt-2.5 uppercase tracking-widest">This week</div>
+      </div>
+      <div class="reveal glass-card p-5 md:p-8 rounded-2xl md:rounded-3xl" data-reveal-delay="200">
+        <span class="text-[10px] font-extrabold uppercase tracking-[0.22em] text-tertiary block mb-2.5">Traffic</span>
+        <div class="text-[34px] md:text-5xl font-extrabold font-headline leading-none" data-countup="42">0</div>
+        <div class="text-[11px] font-bold text-on-surface-variant mt-2.5 uppercase tracking-widest">Leads today</div>
+      </div>
+      <div class="reveal glass-card p-5 md:p-8 rounded-2xl md:rounded-3xl" data-reveal-delay="300">
+        <span class="text-[10px] font-extrabold uppercase tracking-[0.22em] text-green-400 block mb-2.5">Conversion</span>
+        <div class="text-[34px] md:text-5xl font-extrabold font-headline leading-none" data-countup="18">0</div>
+        <div class="text-[11px] font-bold text-on-surface-variant mt-2.5 uppercase tracking-widest">Bookings</div>
+      </div>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="reveal glass-card rounded-2xl md:rounded-[2rem] p-4 md:p-8" data-reveal-delay="400">
+      <div class="flex items-center justify-between mb-4 md:mb-6">
+        <span class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-white">Pipeline · Live</span>
+        <div class="flex items-center gap-1.5 text-green-400">
+          <span class="material-symbols-outlined text-base">trending_up</span>
+          <span class="text-[11px] font-extrabold">+24%</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-2.5 md:gap-5">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">New</span>
+            <span class="bg-surface-container-highest px-2.5 py-0.5 rounded-full text-[10px] font-extrabold">87</span>
+          </div>
+          <div class="bg-surface-container p-3.5 rounded-xl border border-white/5">
+            <div class="text-[13px] font-bold mb-1.5">Tesla Model S</div>
+            <span class="text-[10px] text-primary font-extrabold">$1,200 · Ceramic</span>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Qualified</span>
+            <span class="bg-surface-container-highest px-2.5 py-0.5 rounded-full text-[10px] font-extrabold">52</span>
+          </div>
+          <div class="bg-surface-container p-3.5 rounded-xl border-l-[3px] border-tertiary">
+            <div class="text-[13px] font-bold mb-1.5">Rivian R1T</div>
+            <span class="text-[10px] text-tertiary font-extrabold uppercase tracking-wider">Vetted</span>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Booked</span>
+            <span class="bg-surface-container-highest px-2.5 py-0.5 rounded-full text-[10px] font-extrabold">32</span>
+          </div>
+          <div class="bg-surface-container p-3.5 rounded-xl border border-white/10">
+            <div class="text-[10px] text-primary font-extrabold uppercase mb-1">Sept 12</div>
+            <div class="text-[13px] font-bold">Mercedes G-Wagon</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Done</span>
+            <span class="bg-surface-container-highest px-2.5 py-0.5 rounded-full text-[10px] font-extrabold">28</span>
+          </div>
+          <div class="bg-surface-container p-3.5 rounded-xl border border-green-500/25">
+            <div class="text-[13px] font-bold mb-1.5">Audi RS6</div>
+            <span class="text-[10px] text-green-400 font-extrabold">Paid $3,400</span>
+          </div>
+        </div>
+        <div class="col-span-2 md:col-span-1 bg-gradient-to-br from-primary/25 via-primary/10 to-transparent p-5 rounded-xl md:rounded-2xl border border-primary/30 text-center flex flex-col justify-center">
+          <span class="text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary mb-2 block">Month to Date</span>
+          <div class="text-2xl md:text-3xl font-extrabold font-headline text-white">$18,400</div>
+          <div class="mt-2 flex items-center justify-center gap-1.5 text-green-400">
+            <span class="material-symbols-outlined text-base">trending_up</span>
+            <span class="text-[11px] font-extrabold">+24% growth</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Case Study -->
+<section id="showcase" class="section-y bg-surface">
+  <div class="max-w-screen-2xl mx-auto section-x">
+    <div class="grid lg:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-center">
+      <div class="relative glass-card rounded-[1.75rem] md:rounded-[2.5rem] overflow-hidden aspect-[4/5] md:aspect-[4/5] lg:aspect-auto lg:h-[560px] order-2 lg:order-1">
+        <video autoplay class="w-full h-full object-cover grayscale" loop muted playsinline>
+          <source src="https://stream.mux.com/B85ezsaxI8U7tetCHNa4yARswdkmy02WGSb91c2vj4Ac.m3u8" type="video/mp4"/>
+        </video>
+        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-6 left-6 right-6 z-10">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-primary flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-on-primary-fixed">verified</span>
+            </div>
+            <div>
+              <div class="text-[13px] font-extrabold uppercase tracking-wider">Precision Auto Detail</div>
+              <div class="text-on-surface-variant text-[11px] uppercase tracking-widest">Virginia, USA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2">
+        <span class="t-label text-primary mb-3 block">Proof in action</span>
+        <h2 class="word-reveal h-section font-extrabold font-headline uppercase italic mb-8 md:mb-10" data-word-reveal="1">
+          <span class="w">From</span> <span class="w">ghost</span> <span class="w">town</span> <span class="w">to</span> <span class="w text-primary">fully</span> <span class="w text-primary">booked</span>
+        </h2>
+
+        <div class="grid grid-cols-2 gap-3 md:gap-5 mb-7 md:mb-10">
+          <div class="p-4 md:p-7 bg-surface-container-high rounded-2xl md:rounded-3xl border-l-[3px] border-primary">
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-2">Ad Spend</span>
+            <div class="text-[26px] md:text-3xl font-extrabold font-headline leading-none">$1,200</div>
+          </div>
+          <div class="p-4 md:p-7 bg-surface-container-high rounded-2xl md:rounded-3xl">
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-2">Leads</span>
+            <div class="text-[26px] md:text-3xl font-extrabold font-headline text-primary leading-none">87</div>
+          </div>
+          <div class="p-4 md:p-7 bg-surface-container-high rounded-2xl md:rounded-3xl">
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-2">Bookings</span>
+            <div class="text-[26px] md:text-3xl font-extrabold font-headline leading-none">32</div>
+          </div>
+          <div class="p-4 md:p-7 bg-surface-container-high rounded-2xl md:rounded-3xl border border-primary/25">
+            <span class="text-[10px] font-bold text-primary uppercase tracking-widest block mb-2">Revenue</span>
+            <div class="text-[26px] md:text-3xl font-extrabold font-headline leading-none">$14,800</div>
+          </div>
+        </div>
+
+        <blockquote class="text-on-surface-variant t-lead leading-relaxed mb-7 md:mb-10 italic border-l-2 border-primary/40 pl-4 md:pl-5">
+          "Within 30 days my schedule went from scattered wash jobs to high-ticket ceramic packages. The ROI is undeniable."
+        </blockquote>
+
+        <button class="btn-ghost w-full sm:w-auto px-6 md:px-7 py-4 rounded-2xl font-extrabold uppercase tracking-[0.18em] text-[11px] md:text-xs flex items-center justify-center gap-3">
+          Read more success stories <span class="material-symbols-outlined text-lg">trending_flat</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Onboarding / After You Book -->
+<section class="section-y bg-surface-container-low">
+  <div class="max-w-screen-2xl mx-auto section-x">
+    <div class="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
+      <span class="t-label text-primary mb-3 block">The Onboarding Flow</span>
+      <h2 class="word-reveal h-section font-extrabold font-headline uppercase italic" data-word-reveal="1">
+        <span class="w">What</span> <span class="w">happens</span> <span class="w text-primary">after</span> <span class="w text-primary">you</span> <span class="w text-primary">book</span>
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+      <div class="glass-card p-5 md:p-8 rounded-2xl md:rounded-[1.75rem] text-left hover:-translate-y-1.5 transition duration-500 group">
+        <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 md:mb-8 group-hover:bg-primary transition-colors duration-500">
+          <span class="material-symbols-outlined text-[26px] md:text-[30px] text-primary group-hover:text-black">phone_in_talk</span>
+        </div>
+        <div class="text-primary text-[10px] font-extrabold uppercase tracking-[0.25em] mb-2.5">Step 01</div>
+        <h3 class="h-sub font-extrabold uppercase italic mb-2.5 font-headline">Quick 15-min call</h3>
+        <p class="text-on-surface-variant text-sm md:text-[15px] leading-relaxed">We break down your current lead flow and find where bookings are slipping.</p>
+      </div>
+
+      <div class="glass-card p-5 md:p-8 rounded-2xl md:rounded-[1.75rem] text-left hover:-translate-y-1.5 transition duration-500 group">
+        <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 md:mb-8 group-hover:bg-primary transition-colors duration-500">
+          <span class="material-symbols-outlined text-[26px] md:text-[30px] text-primary group-hover:text-black">analytics</span>
+        </div>
+        <div class="text-primary text-[10px] font-extrabold uppercase tracking-[0.25em] mb-2.5">Step 02</div>
+        <h3 class="h-sub font-extrabold uppercase italic mb-2.5 font-headline">See missed jobs</h3>
+        <p class="text-on-surface-variant text-sm md:text-[15px] leading-relaxed">We pinpoint missed follow-ups and the revenue they're costing you.</p>
+      </div>
+
+      <div class="glass-card p-5 md:p-8 rounded-2xl md:rounded-[1.75rem] text-left hover:-translate-y-1.5 transition duration-500 group">
+        <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 md:mb-8 group-hover:bg-primary transition-colors duration-500">
+          <span class="material-symbols-outlined text-[26px] md:text-[30px] text-primary group-hover:text-black">map</span>
+        </div>
+        <div class="text-primary text-[10px] font-extrabold uppercase tracking-[0.25em] mb-2.5">Step 03</div>
+        <h3 class="h-sub font-extrabold uppercase italic mb-2.5 font-headline">Custom growth plan</h3>
+        <p class="text-on-surface-variant text-sm md:text-[15px] leading-relaxed">A clear roadmap to fill your calendar with high-ticket ceramic and PPF jobs.</p>
+      </div>
+
+      <div class="glass-card p-5 md:p-8 rounded-2xl md:rounded-[1.75rem] text-left hover:-translate-y-1.5 transition duration-500 group">
+        <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 md:mb-8 group-hover:bg-primary transition-colors duration-500">
+          <span class="material-symbols-outlined text-[26px] md:text-[30px] text-primary group-hover:text-black">rocket_launch</span>
+        </div>
+        <div class="text-primary text-[10px] font-extrabold uppercase tracking-[0.25em] mb-2.5">Step 04</div>
+        <h3 class="h-sub font-extrabold uppercase italic mb-2.5 font-headline">Dominate locally</h3>
+        <p class="text-on-surface-variant text-sm md:text-[15px] leading-relaxed">Scale revenue with ads, automation, and AI-driven lead nurture.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section id="pricing" class="section-y relative overflow-hidden bg-background">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,145,87,0.14),transparent_60%)] pointer-events-none"></div>
+  <div class="max-w-screen-2xl mx-auto section-x relative z-10 text-center">
+    <h2 class="word-reveal h-display font-extrabold font-headline uppercase italic mb-5 md:mb-7 max-w-4xl mx-auto text-balance" data-word-reveal="1">
+      <span class="w">Ready</span> <span class="w">to</span> <span class="w text-primary">dominate</span> <span class="w">your</span> <span class="w">market?</span>
+    </h2>
+    <p class="text-on-surface-variant t-lead font-light max-w-2xl mx-auto mb-8 md:mb-10">
+      Stop guessing. Start scaling. We build the systems — you detail the cars.
+    </p>
+    <button class="btn-primary w-full sm:w-auto px-10 py-5 rounded-2xl text-sm md:text-base">
+      Claim your free audit
+    </button>
+    <p class="mt-5 text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant">
+      No contracts · Cancel anytime · 90-day ROI guarantee
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-14 md:py-20 border-t border-white/5 bg-background">
+  <div class="max-w-screen-2xl mx-auto section-x">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-14">
+      <div class="col-span-2 md:col-span-1">
+        <div class="text-lg md:text-xl font-extrabold tracking-tighter text-primary italic font-headline mb-4">Mainstream Marketing</div>
+        <p class="text-[11px] text-on-surface-variant uppercase tracking-[0.18em] font-bold leading-loose">Growth agency for world-class detailers</p>
+      </div>
+      <div>
+        <h4 class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-on-surface-variant mb-5">Resources</h4>
+        <ul class="space-y-3 text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+          <li><a class="hover:text-primary transition" href="https://sites.google.com/view/mainstreammarketing/home" target="_blank" rel="noopener">Privacy Policy</a></li>
+          <li><a class="hover:text-primary transition" href="https://sites.google.com/view/mainstreammarketingt/home" target="_blank" rel="noopener">Terms and Conditions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-on-surface-variant mb-5">Contact</h4>
+        <ul class="space-y-3 text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant normal-case">
+          <li><a class="hover:text-primary transition lowercase" href="mailto:jadensimpson@mainstreamm.com">jadensimpson@mainstreamm.com</a></li>
+          <li><a class="hover:text-primary transition" href="tel:+15409036048">+1 540-903-6048</a></li>
+          <li class="leading-relaxed">5100 Attain Centre Dr<br/>Fredericksburg, VA 22407</li>
+        </ul>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <h4 class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-on-surface-variant mb-5">Stay in the loop</h4>
+        <form class="flex gap-2" onsubmit="event.preventDefault()">
+          <input class="bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-xs w-full focus:ring-1 focus:ring-primary focus:border-primary focus:outline-none" placeholder="Your email" type="email"/>
+          <button class="bg-primary w-11 h-11 rounded-full flex items-center justify-center text-black shrink-0 hover:scale-105 transition" aria-label="Subscribe">
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="text-[10px] font-bold text-center text-neutral-600 uppercase tracking-[0.22em]">
+      © 2026 Mainstream Marketing · All Systems Operational
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // Custom cursor
+  if (canHover && !reduce) {
+    var dot = document.createElement('div'); dot.id = 'cursor-dot';
+    var ring = document.createElement('div'); ring.id = 'cursor-ring';
+    document.body.appendChild(dot); document.body.appendChild(ring);
+    document.body.classList.add('has-custom-cursor');
+    var mx = window.innerWidth/2, my = window.innerHeight/2;
+    var rx = mx, ry = my;
+    window.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; dot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)'; });
+    function loop(){
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)';
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+    document.addEventListener('mouseover', function(e){
+      var t = e.target.closest('a, button, [role=button], .step-card, .glass-card, [data-cursor-hover]');
+      if (t) { dot.classList.add('is-hover'); ring.classList.add('is-hover'); }
+    });
+    document.addEventListener('mouseout', function(e){
+      var t = e.target.closest('a, button, [role=button], .step-card, .glass-card, [data-cursor-hover]');
+      if (t) { dot.classList.remove('is-hover'); ring.classList.remove('is-hover'); }
+    });
+
+    // Ambient sections follow cursor
+    var ambients = document.querySelectorAll('[data-ambient]');
+    window.addEventListener('mousemove', function(e){
+      ambients.forEach(function(a){
+        var r = a.getBoundingClientRect();
+        if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
+          a.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          a.style.setProperty('--my', (e.clientY - r.top) + 'px');
+          a.classList.add('is-active');
+        } else {
+          a.classList.remove('is-active');
+        }
+      });
+    });
+  }
+
+  function fmt(n, sep) { return sep ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : n.toString(); }
+  function runCountup(el) {
+    var target = parseFloat(el.getAttribute('data-countup'));
+    if (isNaN(target)) return;
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    var sep = el.getAttribute('data-sep') === '1';
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var duration = 1600;
+    var start = performance.now();
+    function tick(now) {
+      var p = Math.min(1, (now - start) / duration);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var v = target * eased;
+      var out = decimals > 0 ? v.toFixed(decimals) : Math.round(v).toString();
+      if (sep && decimals === 0) out = fmt(Math.round(v), true);
+      el.textContent = prefix + out + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function finalize(el) {
+    el.classList.add('is-in');
+    if (el.matches('[data-word-reveal]') || el.querySelector('[data-word-reveal]')) {
+      var scope = el.matches('[data-word-reveal]') ? el : el.querySelector('[data-word-reveal]');
+      var ws = scope.querySelectorAll('.w');
+      ws.forEach(function(w, i){ w.style.transitionDelay = (i * 60) + 'ms'; });
+    }
+    var cu = el.matches('[data-countup]') ? [el] : Array.from(el.querySelectorAll('[data-countup]'));
+    cu.forEach(function(n){
+      if (reduce) {
+        var t = parseFloat(n.getAttribute('data-countup'));
+        var prefix = n.getAttribute('data-prefix') || '';
+        var suffix = n.getAttribute('data-suffix') || '';
+        var sep = n.getAttribute('data-sep') === '1';
+        n.textContent = prefix + (sep ? fmt(Math.round(t), true) : Math.round(t).toString()) + suffix;
+      } else {
+        runCountup(n);
+      }
+    });
+  }
+
+  if (typeof IntersectionObserver === 'undefined') {
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-pop,.timeline-line').forEach(finalize);
+    document.querySelectorAll('[data-countup]').forEach(function(el){ if (!el.closest('.reveal,.reveal-left,.reveal-pop')) runCountup(el); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var delay = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+        setTimeout(function(){ finalize(el); }, delay);
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-pop, .timeline-line').forEach(function(el){ io.observe(el); });
+
+  // Standalone word-reveal not wrapped in a .reveal
+  var wrIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var ws = el.querySelectorAll('.w');
+        ws.forEach(function(w, i){ w.style.transitionDelay = (i * 60) + 'ms'; });
+        el.classList.add('is-in');
+        wrIo.unobserve(el);
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('[data-word-reveal]').forEach(function(el){
+    if (!el.closest('.reveal, .reveal-left, .reveal-pop')) wrIo.observe(el);
+  });
+
+  // Standalone countups not wrapped in a reveal
+  var cuIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        runCountup(entry.target);
+        cuIo.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-countup]').forEach(function(el){
+    if (!el.closest('.reveal, .reveal-left, .reveal-pop')) cuIo.observe(el);
+  });
+})();
+</script>
+
+<!-- LeadConnector Chat Widget -->
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69f62886a4b26c4ecf99580d" data-source="WEB_USER"></script>
+</body>
+</html>
