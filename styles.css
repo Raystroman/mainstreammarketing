@@ -287,6 +287,13 @@ body.wiz-locked { overflow: hidden; }
   margin-bottom: 12px;
 }
 .wiz-input::placeholder { color: rgba(255,255,255,0.35); }
+.wiz-input:-webkit-autofill,
+.wiz-input:-webkit-autofill:hover,
+.wiz-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #141414 inset;
+  -webkit-text-fill-color: #fff;
+  border-color: rgba(255,255,255,0.10);
+}
 .wiz-input:focus {
   border-color: rgba(255,145,87,0.6);
   background: rgba(255,255,255,0.06);
