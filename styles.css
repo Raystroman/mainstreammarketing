@@ -40,11 +40,13 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   .glow-primary { box-shadow: 0 12px 40px rgba(255, 145, 87, 0.25), 0 0 0 1px rgba(255, 145, 87, 0.15) inset; }
   .glow-soft { box-shadow: 0 0 60px rgba(255, 145, 87, 0.08); }
 
-/* Client Command Center feed */
+/* Client Command Center */
 .cmd-stage {
   position: relative;
-  height: 58px;
+  height: 64px;
   margin-bottom: 4px;
+  border-radius: 14px;
+  overflow: hidden;
 }
 .cmd-notif-item {
   position: absolute;
@@ -57,24 +59,8 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 14px;
   opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 0.5s cubic-bezier(.22,.61,.36,1), transform 0.5s cubic-bezier(.22,.61,.36,1);
   pointer-events: none;
-}
-.cmd-notif-item.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.cmd-notif-item.is-leaving {
-  opacity: 0;
-  transform: translateY(8px);
-}
-.cmd-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  /* JS owns all transitions — no CSS transition here */
 }
 .cmd-icon {
   width: 30px; height: 30px; border-radius: 9px;
@@ -82,19 +68,17 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 }
 .cmd-text { flex: 1; min-width: 0; }
 .cmd-title {
-  font-size: 11.5px; font-weight: 700; color: #fff;
+  font-size: 12px; font-weight: 700; color: #fff;
   line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .cmd-sub {
-  font-size: 10px; color: rgba(173,170,170,0.82);
+  font-size: 10.5px; color: rgba(173,170,170,0.85);
   line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .cmd-time {
   font-size: 9px; font-weight: 700; letter-spacing: 0.04em;
   color: rgba(173,170,170,0.6); white-space: nowrap; flex-shrink: 0;
 }
-
-@media (prefers-reduced-motion: reduce) { .cmd-feed { animation: none; } }
 
   /* Scroll-reveal — transition-based, triggered by IntersectionObserver adding .is-in */
   .reveal { opacity: 0; transform: translateY(32px); transition: opacity 800ms cubic-bezier(.22,.61,.36,1), transform 800ms cubic-bezier(.22,.61,.36,1); will-change: opacity, transform; }

@@ -373,64 +373,6 @@
     }
   }
 
-  // Command Center feed — crossfade one notification at a time
-  (function(){
-    var stage = document.getElementById('cmdStage');
-    if (!stage) return;
-    if (reduce) return;
-
-    var notifs = [
-      { icon: 'person_add',           color: '#FF9157', bg: 'rgba(255,145,87,0.13)',  title: 'New Lead Received',      sub: 'Ceramic coating inquiry · 2023 BMW M4',      time: 'Just now' },
-      { icon: 'bolt',                  color: '#FF9157', bg: 'rgba(255,145,87,0.13)',  title: 'Instant Follow-Up Sent', sub: 'SMS + email sequence triggered',             time: '1m ago'   },
-      { icon: 'event_available',       color: '#4ade80', bg: 'rgba(74,222,128,0.13)',  title: 'New Job Booked',         sub: 'Full detail appointment · Sat 10:00 AM',     time: '4m ago'   },
-      { icon: 'chat_bubble',           color: '#60a5fa', bg: 'rgba(96,165,250,0.13)',  title: 'Customer Replied',       sub: 'Asked about 5-year coating options',         time: '7m ago'   },
-      { icon: 'request_quote',         color: '#FF9157', bg: 'rgba(255,145,87,0.13)',  title: 'Quote Request Created',  sub: 'PPF + ceramic package',                     time: '12m ago'  },
-      { icon: 'task_alt',              color: '#4ade80', bg: 'rgba(74,222,128,0.13)',  title: 'Job Marked Closed',      sub: 'Premium detail completed · $349',            time: '15m ago'  },
-      { icon: 'alarm',                 color: '#fbbf24', bg: 'rgba(251,191,36,0.13)',  title: 'Follow-Up Reminder',     sub: 'Lead needs second touch today',              time: '22m ago'  },
-      { icon: 'edit_calendar',         color: '#60a5fa', bg: 'rgba(96,165,250,0.13)',  title: 'Calendar Updated',       sub: 'New appointment added to booking',           time: '30m ago'  },
-      { icon: 'local_fire_department', color: '#fb7185', bg: 'rgba(251,113,133,0.13)', title: 'Hot Lead Alert',         sub: 'Ready to book after price breakdown',        time: '1h ago'   },
-      { icon: 'star',                  color: '#a78bfa', bg: 'rgba(167,139,250,0.13)', title: 'Review Request Sent',    sub: 'Post-job follow-up automation triggered',    time: 'Today'    },
-    ];
-
-    var idx = 0, current = null, FADE = 500, HOLD = 2800;
-
-    function makeEl(n) {
-      var el = document.createElement('div');
-      el.className = 'cmd-notif-item';
-      el.innerHTML =
-        '<div class="cmd-icon" style="background:' + n.bg + '">' +
-          '<span class="material-symbols-outlined" style="color:' + n.color + ';font-size:15px">' + n.icon + '</span>' +
-        '</div>' +
-        '<div class="cmd-text">' +
-          '<div class="cmd-title">' + n.title + '</div>' +
-          '<div class="cmd-sub">' + n.sub + '</div>' +
-        '</div>' +
-        '<div class="cmd-time">' + n.time + '</div>';
-      return el;
-    }
-
-    function showNext() {
-      var n = notifs[idx % notifs.length];
-      idx++;
-      var el = makeEl(n);
-      stage.appendChild(el);
-
-      // Fade in
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){
-        el.classList.add('is-visible');
-      }); });
-
-      // Hold, then fade out and advance
-      setTimeout(function(){
-        el.classList.remove('is-visible');
-        el.classList.add('is-leaving');
-        setTimeout(function(){ el.remove(); showNext(); }, FADE);
-      }, HOLD);
-    }
-
-    showNext();
-  })();
-
   function submit() {
     go('submitting');
     var payload = {
@@ -457,5 +399,71 @@
       .finally(function(){
         setTimeout(function(){ go('booked'); }, 900);
       });
+  }
+})();
+
+
+/* ===== Client Command Center — notification rotator ===== */
+(function(){
+  var items = Array.prototype.slice.call(
+    document.querySelectorAll('#cmdStage .cmd-notif-item')
+  );
+  if (!items.length) return;
+
+  var FADE_IN  = 480;   // ms to fade in
+  var HOLD     = 3200;  // ms to stay visible
+  var FADE_OUT = 420;   // ms to fade out
+  var INTERVAL = HOLD + FADE_OUT + 80; // total time before next starts
+
+  var idx = 0;
+
+  function applyStyles(el, styles) {
+    Object.keys(styles).forEach(function(k){ el.style[k] = styles[k]; });
+  }
+
+  function showItem(el) {
+    // Start hidden and slightly above
+    applyStyles(el, { transition: 'none', opacity: '0', transform: 'translateY(-7px)' });
+    // Force browser to register the initial state before animating
+    void el.offsetWidth;
+    // Animate in
+    applyStyles(el, {
+      transition: 'opacity ' + FADE_IN + 'ms ease, transform ' + FADE_IN + 'ms ease',
+      opacity: '1',
+      transform: 'translateY(0)'
+    });
+  }
+
+  function hideItem(el, done) {
+    // Fade out in place (no transform change so it doesn't jump)
+    applyStyles(el, {
+      transition: 'opacity ' + FADE_OUT + 'ms ease',
+      opacity: '0'
+    });
+    setTimeout(function() {
+      // Reset inline styles so it's clean for next cycle
+      el.removeAttribute('style');
+      if (done) done();
+    }, FADE_OUT + 20);
+  }
+
+  // Show first notification immediately on load
+  showItem(items[0]);
+
+  // Rotate
+  setInterval(function() {
+    var outgoing = items[idx];
+    idx = (idx + 1) % items.length;
+    var incoming = items[idx];
+
+    hideItem(outgoing, function() {
+      showItem(incoming);
+    });
+  }, INTERVAL);
+
+  // Reduce motion: just show first item statically
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach(function(el) { el.removeAttribute('style'); });
+    items[0].style.opacity = '1';
   }
 })();
