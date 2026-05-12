@@ -373,6 +373,13 @@
     }
   }
 
+  // Command Center feed — duplicate rows for seamless CSS scroll loop
+  (function(){
+    var feed = document.getElementById('cmdFeed');
+    if (!feed) return;
+    feed.innerHTML += feed.innerHTML;
+  })();
+
   function submit() {
     go('submitting');
     var payload = {
