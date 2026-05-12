@@ -185,33 +185,76 @@
 
 /* ===== Meta Pixel — tracking data capture ===== */
 (function(){
-  var data = { fbp: '', fbc: '', fbclid: '', landing_page_url: '', user_agent: '' };
+  var LS_KEY = 'mm_pixel_data';
+  var LANDING_URL = window.location.href;
+  var UA = navigator.userAgent;
 
-  // Read a cookie by name
   function getCookie(name) {
     var match = document.cookie.match(new RegExp('(?:^|;)\\s*' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
     return match ? decodeURIComponent(match[1]) : '';
   }
 
-  // Capture fbclid from URL params (present on Meta ad click-throughs)
-  try {
-    var params = new URLSearchParams(window.location.search);
-    data.fbclid = params.get('fbclid') || '';
-  } catch (e) {}
-
-  // Read _fbp and _fbc cookies set by Meta Pixel
-  data.fbp = getCookie('_fbp');
-  data.fbc = getCookie('_fbc');
-
-  // Construct fbc from fbclid if cookie is missing
-  if (!data.fbc && data.fbclid) {
-    data.fbc = 'fb.1.' + Date.now() + '.' + data.fbclid;
+  function lsGet() {
+    try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function lsSet(obj) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(obj)); } catch(e) {}
   }
 
-  data.landing_page_url = window.location.href;
-  data.user_agent = navigator.userAgent;
+  // Step 1: capture fbclid from URL immediately and persist to localStorage
+  var fbclid = '';
+  try {
+    fbclid = new URLSearchParams(window.location.search).get('fbclid') || '';
+  } catch(e) {}
+  if (fbclid) {
+    var stored = lsGet();
+    stored.fbclid = fbclid;
+    // Pre-build fbc now so the timestamp reflects the click time
+    stored.fbc_from_click = 'fb.1.' + Date.now() + '.' + fbclid;
+    lsSet(stored);
+  }
 
-  window.__pixelData = data;
+  // Step 2: read _fbp cookie — retry up to 6 times (500ms apart) since Pixel loads async
+  var attempts = 0;
+  function tryCaptureFbp() {
+    var fbp = getCookie('_fbp');
+    var fbc = getCookie('_fbc');
+    var saved = lsGet();
+
+    if (fbp) saved.fbp = fbp;
+    if (fbc) saved.fbc = fbc;
+    // Fallback: build fbc from saved click data if cookie never arrives
+    if (!saved.fbc && saved.fbc_from_click) saved.fbc = saved.fbc_from_click;
+
+    lsSet(saved);
+    window.__pixelData = {
+      fbp: saved.fbp || '',
+      fbc: saved.fbc || '',
+      fbclid: saved.fbclid || fbclid,
+      landing_page_url: LANDING_URL,
+      user_agent: UA
+    };
+
+    attempts++;
+    if (!fbp && attempts < 6) setTimeout(tryCaptureFbp, 500);
+  }
+
+  // Start first attempt after a short delay to let Pixel script run
+  setTimeout(tryCaptureFbp, 300);
+
+  // Expose a fresh-read helper for submit() to call right before sending
+  window.__getPixelData = function() {
+    var fbp = getCookie('_fbp');
+    var fbc = getCookie('_fbc');
+    var saved = lsGet();
+    return {
+      fbp:             fbp  || saved.fbp  || '',
+      fbc:             fbc  || saved.fbc  || '',
+      fbclid:          saved.fbclid || fbclid,
+      landing_page_url: LANDING_URL,
+      user_agent:       UA
+    };
+  };
 })();
 
 
@@ -422,12 +465,23 @@
       state.phone
     ) ? 'qualified' : 'standard';
 
+    // Re-read tracking data fresh at submit time; fall back to localStorage values
+    var pd = (typeof window.__getPixelData === 'function')
+      ? window.__getPixelData()
+      : (window.__pixelData || {});
+
+    // Debug — remove after confirming values are populated
+    console.log('[MM Tracking] fbp:', pd.fbp);
+    console.log('[MM Tracking] fbc:', pd.fbc);
+    console.log('[MM Tracking] fbclid:', pd.fbclid);
+    console.log('[MM Tracking] event_id:', event_id);
+    console.log('[MM Tracking] qualified_event_id:', qualified_event_id);
+
     // Fire browser-side Meta Pixel Lead event (Zapier handles server-side CAPI)
     if (typeof fbq === 'function') {
       fbq('track', 'Lead', {}, { eventID: event_id });
     }
 
-    var pd = window.__pixelData || {};
     var payload = {
       first_name: state.first_name,
       last_name: state.last_name,
