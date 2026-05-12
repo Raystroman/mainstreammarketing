@@ -183,6 +183,38 @@
 })();
 
 
+/* ===== Meta Pixel — tracking data capture ===== */
+(function(){
+  var data = { fbp: '', fbc: '', fbclid: '', landing_page_url: '', user_agent: '' };
+
+  // Read a cookie by name
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(?:^|;)\\s*' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : '';
+  }
+
+  // Capture fbclid from URL params (present on Meta ad click-throughs)
+  try {
+    var params = new URLSearchParams(window.location.search);
+    data.fbclid = params.get('fbclid') || '';
+  } catch (e) {}
+
+  // Read _fbp and _fbc cookies set by Meta Pixel
+  data.fbp = getCookie('_fbp');
+  data.fbc = getCookie('_fbc');
+
+  // Construct fbc from fbclid if cookie is missing
+  if (!data.fbc && data.fbclid) {
+    data.fbc = 'fb.1.' + Date.now() + '.' + data.fbclid;
+  }
+
+  data.landing_page_url = window.location.href;
+  data.user_agent = navigator.userAgent;
+
+  window.__pixelData = data;
+})();
+
+
 /* ===== Qualification Wizard ===== */
 (function(){
   var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/zpcsycTHoHZmUwrfk5zn/webhook-trigger/8e82fc4c-5fe0-4bdb-8c61-cfe0e9e7d453';
@@ -375,6 +407,27 @@
 
   function submit() {
     go('submitting');
+
+    // Generate deduplicated event IDs for browser Pixel + Zapier CAPI
+    var event_id = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+    var qualified_event_id = event_id + '_qualified';
+
+    // Lead quality: "qualified" if open to investing + has revenue + services + contact info
+    var invest = state.growth_open;
+    var lead_quality = (
+      (invest === 'Yes' || invest === 'Possibly') &&
+      state.revenue &&
+      state.services.length > 0 &&
+      state.email &&
+      state.phone
+    ) ? 'qualified' : 'standard';
+
+    // Fire browser-side Meta Pixel Lead event (Zapier handles server-side CAPI)
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', {}, { eventID: event_id });
+    }
+
+    var pd = window.__pixelData || {};
     var payload = {
       first_name: state.first_name,
       last_name: state.last_name,
@@ -388,8 +441,18 @@
       currently_struggling_with: state.struggle,
       open_to_investing: state.growth_open,
       source: 'mainstream-marketing-landing',
-      submitted_at: new Date().toISOString()
+      submitted_at: new Date().toISOString(),
+      // Tracking fields for Zapier CAPI
+      fbp: pd.fbp || '',
+      fbc: pd.fbc || '',
+      fbclid: pd.fbclid || '',
+      event_source_url: pd.landing_page_url || window.location.href,
+      user_agent: pd.user_agent || navigator.userAgent,
+      event_id: event_id,
+      qualified_event_id: qualified_event_id,
+      lead_quality: lead_quality
     };
+
     fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
