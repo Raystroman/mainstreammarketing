@@ -297,29 +297,29 @@ body.wiz-locked { overflow: hidden; }
 
 .wiz-input {
   width: 100%;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 14px;
   padding: 14px 16px;
-  color: #fff;
+  color: #111;
   font-size: 15px;
   font-family: inherit;
   outline: none;
   transition: border-color .2s, background .2s, box-shadow .2s;
   margin-bottom: 12px;
 }
-.wiz-input::placeholder { color: rgba(255,255,255,0.35); }
+.wiz-input::placeholder { color: rgba(0,0,0,0.4); }
 .wiz-input:-webkit-autofill,
 .wiz-input:-webkit-autofill:hover,
 .wiz-input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #141414 inset;
-  -webkit-text-fill-color: #fff;
-  border-color: rgba(255,255,255,0.10);
+  -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.88) inset;
+  -webkit-text-fill-color: #111;
+  border-color: rgba(255,255,255,0.12);
 }
 .wiz-input:focus {
-  border-color: rgba(255,145,87,0.6);
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 0 0 4px rgba(255,145,87,0.12);
+  border-color: rgba(255,145,87,0.7);
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 0 0 4px rgba(255,145,87,0.15);
 }
 .wiz-input.is-error {
   border-color: rgba(244,93,93,0.7);
