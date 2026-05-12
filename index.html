@@ -45,8 +45,26 @@
 </head>
 <body class="bg-background text-on-surface font-body selection:bg-primary/30">
 
+<!-- Announcement Bar -->
+<div class="announce-bar fixed top-0 inset-x-0 z-[60]" id="announce-bar">
+  <div class="relative overflow-hidden flex items-center justify-center gap-2.5 px-4 h-10">
+    <span class="relative flex h-2 w-2 shrink-0">
+      <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 pulse-dot"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+    </span>
+    <p class="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-white/85">
+      New clients receive <span class="text-primary font-extrabold">$1,000 cash back</span> when they sign on
+      <span class="hidden sm:inline text-white/40 mx-1.5">·</span>
+      <button class="hidden sm:inline-flex items-center gap-0.5 text-primary hover:text-white transition-colors duration-150 font-extrabold" data-open-wizard="1">
+        Claim Offer <span class="material-symbols-outlined text-[13px] leading-none translate-y-[1px]">arrow_forward</span>
+      </button>
+    </p>
+    <div class="announce-shimmer absolute inset-0 pointer-events-none"></div>
+  </div>
+</div>
+
 <!-- Navigation -->
-<nav class="fixed top-0 inset-x-0 z-50 bg-[#0E0E0E]/80 backdrop-blur-2xl border-b border-white/5">
+<nav class="fixed top-10 inset-x-0 z-50 bg-[#0E0E0E]/80 backdrop-blur-2xl border-b border-white/5">
   <div class="flex justify-between items-center gap-3 section-x max-w-screen-2xl mx-auto py-3.5 md:py-5">
     <a href="#" class="text-base sm:text-lg md:text-2xl font-extrabold tracking-tighter text-primary italic font-headline shrink min-w-0 truncate">Mainstream Marketing</a>
     <div class="hidden lg:flex gap-8 items-center font-headline font-bold tracking-tight text-sm">
@@ -60,7 +78,7 @@
 </nav>
 
 <!-- Hero -->
-<section class="relative min-h-[88vh] md:min-h-screen flex items-center pt-24 md:pt-32 pb-20 md:pb-28 overflow-hidden">
+<section class="relative min-h-[88vh] md:min-h-screen flex items-center pt-36 md:pt-44 pb-20 md:pb-28 overflow-hidden">
   <div class="absolute inset-0 z-0">
     <img alt="" class="w-full h-full object-cover opacity-50 md:opacity-60 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfI2uay7iU0RR4BerjGofT21jD_o_RHiOhtc7z_6WRhmgi44N-vBswIB4YTNNLB38KFbwo74x8k6fUMQenvcR7hl5bMubsyzEyxXkjAbKVTLOI3QLytZo2C55tJixsnbvB2t6PcUDmc8UBOv5u4HmXZapXzWZ-kyyEKk-N3GuA8jiMfDVpSNCGQFM_BeGW6uTrrSPHv6qNcb_0Ue7O7RKBN4E8n0leBsuiv3Pw-cb-zyn57QIqfY0rIrR2HtiMkUyI0O6U3pg260Ss"/>
     <div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40"></div>

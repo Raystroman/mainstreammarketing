@@ -1,4 +1,26 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+/* Announcement bar */
+.announce-bar {
+  background: linear-gradient(90deg, #0e0e0e 0%, #1c0e05 40%, #1c0e05 60%, #0e0e0e 100%);
+  border-bottom: 1px solid rgba(255, 145, 87, 0.22);
+}
+@keyframes announceShimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+.announce-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,145,87,0.12) 50%, transparent 100%);
+  animation: announceShimmer 3.2s ease-in-out infinite;
+}
+@keyframes announceGlow {
+  0%, 100% { box-shadow: 0 1px 12px rgba(255,145,87,0.10); }
+  50%       { box-shadow: 0 1px 20px rgba(255,145,87,0.22); }
+}
+.announce-bar { animation: announceGlow 4s ease-in-out infinite; }
   body { overflow-x: hidden; font-family: 'Inter', system-ui, sans-serif; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24; }
 
