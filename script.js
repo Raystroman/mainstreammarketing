@@ -260,7 +260,7 @@
 
 /* ===== Qualification Wizard ===== */
 (function(){
-  var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/zpcsycTHoHZmUwrfk5zn/webhook-trigger/8e82fc4c-5fe0-4bdb-8c61-cfe0e9e7d453';
+  var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/zpcsycTHoHZmUwrfk5zn/webhook-trigger/21eb49d4-b70a-4e93-b5f9-1aada05ea468';
 
   var overlay = document.getElementById('wizard-overlay');
   if (!overlay) return;
